@@ -23,7 +23,7 @@ const securityMiddleware = async (req: Request, res: Response, next: NextFunctio
                 break;
             default:
                 limit = 5;
-                message = 'Please sign up for higher limits';
+                message = 'Guest request limit exceeded (5 per minute). Please sign up for higher limits.';
                 break;
             
         }
@@ -49,12 +49,12 @@ const securityMiddleware = async (req: Request, res: Response, next: NextFunctio
             return res.status(403).json({error: 'Forbidden', message: 'Automated requests are not allowed.'});
         }
 
-         if(decision.isDenied() && decision.reason.isShield()) {
+        if(decision.isDenied() && decision.reason.isShield()) {
             return res.status(403).json({error: 'Forbidden', message: 'Request blocked by security policy.'});
         }
 
-         if(decision.isDenied() && decision.reason.isRateLimit()) {
-            return res.status(403).json({error: 'Too many requests', message});
+        if(decision.isDenied() && decision.reason.isRateLimit()) {
+            return res.status(429).json({error: 'Too many requests', message});
         }
 
         next();
