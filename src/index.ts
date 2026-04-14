@@ -6,9 +6,11 @@ import cors from 'cors';
 import subjectsRouter from './routes/subjects.js';
 import userRoutes from './routes/users.js';
 import classesRouter from './routes/classes.js';
+import departmentsRouter from './routes/departments.js';
 import securityMiddleware from './middleware/security.js';
 import { toNodeHandler } from 'better-auth/node';
 import { auth } from './lib/auth.js';
+
 
 const app = express(); 
 const PORT = 3000;
@@ -28,9 +30,10 @@ app.use(securityMiddleware);
 app.use('/api/subjects', subjectsRouter);
 app.use('/api/users', userRoutes);
 app.use('/api/classes', classesRouter);
+app.use('/api/departments', departmentsRouter);
 
 app.get('/', (req, res) => {
-    res.send('Hello World!');
+    res.send('Backend server is running!');
 });
 
 app.listen(PORT, () => {
