@@ -7,6 +7,7 @@ import subjectsRouter from './routes/subjects.js';
 import userRoutes from './routes/users.js';
 import classesRouter from './routes/classes.js';
 import departmentsRouter from './routes/departments.js';
+import statsRouter from './routes/stat.js';
 import enrollmentsRouter from './routes/enrollments.js';
 import securityMiddleware from './middleware/security.js';
 import { toNodeHandler } from 'better-auth/node';
@@ -32,6 +33,7 @@ app.use('/api/subjects', subjectsRouter);
 app.use('/api/users', userRoutes);
 app.use('/api/classes', classesRouter);
 app.use('/api/departments', departmentsRouter);
+app.use('/api/stats', statsRouter);
 app.use('/api/enrollments', enrollmentsRouter);
 
 app.get('/', (req, res) => {
