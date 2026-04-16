@@ -7,7 +7,7 @@ import subjectsRouter from './routes/subjects.js';
 import userRoutes from './routes/users.js';
 import classesRouter from './routes/classes.js';
 import departmentsRouter from './routes/departments.js';
-import statsRouter from './routes/stat.js';
+import statsRouter from './routes/stats.js';
 import enrollmentsRouter from './routes/enrollments.js';
 import securityMiddleware from './middleware/security.js';
 import { toNodeHandler } from 'better-auth/node';
