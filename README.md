@@ -2,8 +2,21 @@
 
 REST API for the Classroom Admin Dashboard. Built with Node.js, Express, and Drizzle ORM on a serverless Neon PostgreSQL database. Features enterprise-grade authentication via Better Auth, security primitives via Arcjet, and media management via Cloudinary.
 
+**Live API:** [classroombackend-production-559c.up.railway.app](https://classroombackend-production-559c.up.railway.app)
 **Frontend Repository:** [github.com/jainilpatel89/classroom_frontend](https://github.com/jainilpatel89/classroom_frontend)  
 **Live Frontend:** [classroom-frontend-gules.vercel.app](https://classroom-frontend-gules.vercel.app)
+
+---
+
+## Features
+
+- RESTful API for managing departments, subjects, classes, faculty, and student enrollments
+- Invite code system for linking students to classes
+- Relational data model connecting departments → subjects → classes → enrollments
+- Authentication with email/password and social sign-on (Google, GitHub, Apple) via Better Auth
+- Rate limiting, bot protection, and sensitive data masking via Arcjet
+- Image and media upload, storage, and delivery via Cloudinary
+- Type-safe database queries with Drizzle ORM on serverless Neon PostgreSQL
 
 ---
 
@@ -64,7 +77,7 @@ REST API for the Classroom Admin Dashboard. Built with Node.js, Express, and Dri
 |---|---|---|
 | GET | `/api/users` | Get all users |
 | GET | `/api/users/:id` | Get a user by ID |
-| GET | `/api/users/:id/departments` | Get departments assoiciated with a user |
+| GET | `/api/users/:id/departments` | Get departments associated with a user |
 | GET | `/api/users/:id/subjects` | Get subjects associated with a user |
 
 ### Enrollments
@@ -81,7 +94,6 @@ REST API for the Classroom Admin Dashboard. Built with Node.js, Express, and Dri
 | POST | `/api/classes` | Create a new class |
 | GET | `/api/classes/:id/users` | Get users in a class |
 
-> Note: Update (PUT) and Delete (DELETE) operations are not yet implemented.
 
 ---
 
