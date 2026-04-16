@@ -2,7 +2,7 @@
 
 REST API for the Classroom Admin Dashboard. Built with Node.js, Express, and Drizzle ORM on a serverless Neon PostgreSQL database. Features enterprise-grade authentication via Better Auth, security primitives via Arcjet, and media management via Cloudinary.
 
-**Live API:** [classroombackend-production-559c.up.railway.app](https://classroombackend-production-559c.up.railway.app)
+**Live API:** [classroombackend-production-559c.up.railway.app](https://classroombackend-production-559c.up.railway.app)  
 **Frontend Repository:** [github.com/jainilpatel89/classroom_frontend](https://github.com/jainilpatel89/classroom_frontend)  
 **Live Frontend:** [classroom-frontend-gules.vercel.app](https://classroom-frontend-gules.vercel.app)
 
@@ -13,7 +13,7 @@ REST API for the Classroom Admin Dashboard. Built with Node.js, Express, and Dri
 - RESTful API for managing departments, subjects, classes, faculty, and student enrollments
 - Invite code system for linking students to classes
 - Relational data model connecting departments → subjects → classes → enrollments
-- Authentication with email/password and social sign-on (Google, GitHub, Apple) via Better Auth
+- Authentication with email/password via Better Auth
 - Rate limiting, bot protection, and sensitive data masking via Arcjet
 - Image and media upload, storage, and delivery via Cloudinary
 - Type-safe database queries with Drizzle ORM on serverless Neon PostgreSQL
@@ -58,19 +58,19 @@ REST API for the Classroom Admin Dashboard. Built with Node.js, Express, and Dri
 |---|---|---|
 | GET | `/api/subjects` | Get all subjects |
 | GET | `/api/subjects/:id` | Get a subject by ID |
-| POST | `/api/subjects` | Create a new subject |
 | GET | `/api/subjects/:id/classes` | Get classes for a subject |
 | GET | `/api/subjects/:id/users` | Get users for a subject |
+| POST | `/api/subjects` | Create a new subject |
 
 ### Departments
 | Method | Endpoint | Description |
 |---|---|---|
 | GET | `/api/departments` | Get all departments |
 | GET | `/api/departments/:id` | Get a department by ID |
-| POST | `/api/departments` | Create a new department |
 | GET | `/api/departments/:id/subjects` | Get subjects in a department |
 | GET | `/api/departments/:id/classes` | Get classes in a department |
 | GET | `/api/departments/:id/users` | Get users in a department |
+| POST | `/api/departments` | Create a new department |
 
 ### Faculty
 | Method | Endpoint | Description |
@@ -91,8 +91,8 @@ REST API for the Classroom Admin Dashboard. Built with Node.js, Express, and Dri
 |---|---|---|
 | GET | `/api/classes` | Get all classes |
 | GET | `/api/classes/:id` | Get a class by ID |
-| POST | `/api/classes` | Create a new class |
 | GET | `/api/classes/:id/users` | Get users in a class |
+| POST | `/api/classes` | Create a new class |
 
 
 ---
