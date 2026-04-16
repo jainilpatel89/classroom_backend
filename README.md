@@ -1,6 +1,6 @@
-# 🎓 Classroom Admin Dashboard — Backend
+# 🎓 Classroom Management Application — Backend
 
-REST API for the Classroom Admin Dashboard. Built with Node.js, Express, and Drizzle ORM on a serverless Neon PostgreSQL database. Features enterprise-grade authentication via Better Auth, security primitives via Arcjet, and media management via Cloudinary.
+REST API for the Classroom Management Application. Built with Node.js, Express, and Drizzle ORM on a serverless Neon PostgreSQL database. Features enterprise-grade authentication via Better Auth, security primitives via Arcjet, and media management via Cloudinary.
 
 **Live API:** [classroombackend-production-559c.up.railway.app](https://classroombackend-production-559c.up.railway.app)  
 **Frontend Repository:** [github.com/jainilpatel89/classroom_frontend](https://github.com/jainilpatel89/classroom_frontend)  
