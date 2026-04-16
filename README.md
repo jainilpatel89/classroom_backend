@@ -36,7 +36,9 @@ REST API for the Classroom Admin Dashboard. Built with Node.js, Express, and Dri
 ### Dashboard
 | Method | Endpoint | Description |
 |---|---|---|
-| GET | `/api/dashboard` | Returns overview stats (total users, students, teachers, admins) |
+| GET | `/api/stats/overview` | Get overall system statistics |
+| GET | `/api/stats/latest` | Get latest classes and teachers |
+| GET | `/api/stats/charts` | Get aggregated data for charts |
 
 ### Subjects
 | Method | Endpoint | Description |
@@ -44,8 +46,8 @@ REST API for the Classroom Admin Dashboard. Built with Node.js, Express, and Dri
 | GET | `/api/subjects` | Get all subjects |
 | GET | `/api/subjects/:id` | Get a subject by ID |
 | POST | `/api/subjects` | Create a new subject |
-| PUT | `/api/subjects/:id` | Update a subject |
-| DELETE | `/api/subjects/:id` | Delete a subject |
+| GET | `/api/subjects/:id/classes` | Get classes for a subject |
+| GET | `/api/subjects/:id/users` | Get users for a subject |
 
 ### Departments
 | Method | Endpoint | Description |
@@ -53,15 +55,23 @@ REST API for the Classroom Admin Dashboard. Built with Node.js, Express, and Dri
 | GET | `/api/departments` | Get all departments |
 | GET | `/api/departments/:id` | Get a department by ID |
 | POST | `/api/departments` | Create a new department |
-| PUT | `/api/departments/:id` | Update a department |
-| DELETE | `/api/departments/:id` | Delete a department |
+| GET | `/api/departments/:id/subjects` | Get subjects in a department |
+| GET | `/api/departments/:id/classes` | Get classes in a department |
+| GET | `/api/departments/:id/users` | Get users in a department |
+
+### Faculty
+| Method | Endpoint | Description |
+|---|---|---|
+| GET | `/api/users` | Get all users |
+| GET | `/api/users/:id` | Get a user by ID |
+| GET | `/api/users/:id/departments` | Get departments assoiciated with a user |
+| GET | `/api/users/:id/subjects` | Get subjects associated with a user |
 
 ### Enrollments
 | Method | Endpoint | Description |
 |---|---|---|
-| GET | `/api/enrollments` | Get all enrollments |
-| GET | `/api/enrollments/:id` | Get enrollment by ID |
-| POST | `/api/enrollments` | Create a new enrollment |
+| POST | `/api/enrollments` | Enroll a student in a class |
+| POST | `/api/enrollments/join` | Join a class using an invite code |
 
 ### Classes
 | Method | Endpoint | Description |
@@ -69,8 +79,9 @@ REST API for the Classroom Admin Dashboard. Built with Node.js, Express, and Dri
 | GET | `/api/classes` | Get all classes |
 | GET | `/api/classes/:id` | Get a class by ID |
 | POST | `/api/classes` | Create a new class |
-| PUT | `/api/classes/:id` | Update a class |
-| DELETE | `/api/classes/:id` | Delete a class |
+| GET | `/api/classes/:id/users` | Get users in a class |
+
+> Note: Update (PUT) and Delete (DELETE) operations are not yet implemented.
 
 ---
 
@@ -98,23 +109,18 @@ npm install
 
 3. Create a `.env` file in the root directory (use `.env.example` as reference)
 ```
-# Server
-PORT=5000
-
-# Database (Neon)
+# Database
 DATABASE_URL=
 
-# Authentication (Better Auth)
-BETTER_AUTH_SECRET=
-BETTER_AUTH_URL=
+# Frontend
+FRONTEND_URL=
 
 # Security (Arcjet)
 ARCJET_KEY=
+ARCJET_ENV=
 
-# Media (Cloudinary)
-CLOUDINARY_CLOUD_NAME=
-CLOUDINARY_API_KEY=
-CLOUDINARY_API_SECRET=
+# Authentication (Better Auth)
+BETTER_AUTH_SECRET=
 ```
 
 4. Push the database schema
@@ -142,14 +148,11 @@ Create a `.env` file based on `.env.example`:
 
 | Variable | Description |
 |---|---|
-| `PORT` | Port the server runs on (default: 3000) |
 | `DATABASE_URL` | Neon PostgreSQL connection string |
+| `FRONTEND_URL` | URL of the frontend application |
 | `BETTER_AUTH_SECRET` | Secret key for Better Auth session signing |
-| `BETTER_AUTH_URL` | Base URL of the backend (for auth callbacks) |
 | `ARCJET_KEY` | Arcjet API key for security features |
-| `CLOUDINARY_CLOUD_NAME` | Cloudinary cloud name |
-| `CLOUDINARY_API_KEY` | Cloudinary API key |
-| `CLOUDINARY_API_SECRET` | Cloudinary API secret |
+| `ARCJET_ENV` | Arcjet environment mode (`development` or `production`) |
 
 ---
 
@@ -157,17 +160,12 @@ Create a `.env` file based on `.env.example`:
 
 ```
 ├── src/
-│   ├── routes/         # Express route handlers
-│   │   ├── students.ts
-│   │   ├── teachers.ts
-│   │   ├── classes.ts
-│   │   ├── subjects.ts
-│   │   └── departments.ts
-│   ├── controllers/    # Business logic
+│   ├── config/         # Arcjet config for rate limiting and bot detection
 │   ├── db/             # Drizzle ORM config and schema
 │   ├── lib/            # Arcjet, Cloudinary, and Better Auth setup
+│   ├── middleware/     # Role-based rate limiting with Arcjet
+│   ├── routes/         # Express route handlers
 │   └── index.ts        # Entry point
-├── .env.example        # Example environment variables (safe to commit)
 ├── drizzle.config.ts   # Drizzle ORM configuration
 └── package.json
 ```
