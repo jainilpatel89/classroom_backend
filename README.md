@@ -150,9 +150,9 @@ Create a `.env` file based on `.env.example`:
 |---|---|
 | `DATABASE_URL` | Neon PostgreSQL connection string |
 | `FRONTEND_URL` | URL of the frontend application |
-| `BETTER_AUTH_SECRET` | Secret key for Better Auth session signing |
 | `ARCJET_KEY` | Arcjet API key for security features |
 | `ARCJET_ENV` | Arcjet environment mode (`development` or `production`) |
+| `BETTER_AUTH_SECRET` | Secret key for Better Auth session signing |
 
 ---
 
